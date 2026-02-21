@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Search, Lightbulb, Brain } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -9,6 +9,18 @@ import useResultNavigation from '../hooks/useResultNavigation';
 import ResultHeroCard from "./resultHero";
 import VideoDemo from "./videoDemo";
 import DrillPopup from "../../../shared/components/popup/drillPopup";
+
+// Types
+import type { AnalysisWithIssues, IssueDisplay } from '../types';
+
+interface ResultBoxProps {
+    analysis: AnalysisWithIssues | null;
+    issue: IssueDisplay | null;
+    totalIssues: number;
+    video_url: string | null;
+    activeProblem: number;
+    setActiveProblem: (index: number) => void;
+}
 
 
 const SEVERITY_COLORS = {
@@ -40,7 +52,7 @@ const TAB_CONFIGS = {
   try: { icon: Lightbulb, label: "Try this" }
 };
 
-export default function ResultBox({ analysis, issue, totalIssues, video_url, activeProblem, setActiveProblem }) {
+export default function ResultBox({ analysis, issue, totalIssues, video_url, activeProblem, setActiveProblem }: ResultBoxProps) {
 
   if (!analysis || !issue) return null;
 
